@@ -13,6 +13,19 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * props.js
+ *
+ * Purpose: 
+ * implement a simple observer-pattern object which can have multiple watchers.
+ * 
+ * Usage:
+ * Prop holds the property value, which is set using the Set command. Any watchers of Prop are informed whenever the 
+ * set command is called.
+ * 
+ * Watchers are added to the Prop.watchers array. Watchers will need to be created with a function which
+ * defines their behaviour when the property changes. They can be initialized with an .object property which can hold a DOM
+ * object, for the purpose of then defining the update function.
  */
 
 "use strict";
@@ -20,11 +33,12 @@
 //########################################################//
 /**
  * prop()
- * @returns {undefined}
+ * @returns {Prop} 
  */
 var Prop = function() {    
     this._value = 0; // internal property holder    
     this.watchers = [];
+    return this;
 };
 
 Prop.prototype.set = function (value, doNotBroadcast) {
